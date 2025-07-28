@@ -1,6 +1,5 @@
 import { container } from 'tsyringe';
 
-import { IUserService } from '../interfaces/user.interface';
 //import { IAuthService } from '../interfaces/auth.interface';
 
 //import { AuthService } from '../services/auth.service';
