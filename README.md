@@ -1,4 +1,4 @@
-# 🚀 Node.js Auth CRUD Starter Kit
+# 🚀 Node.js Starter Kit
 
 A powerful Node.js backend starter kit with comprehensive CLI generators for rapid development. Built with Express, TypeScript, TypeORM, and tsyringe dependency injection.
 
