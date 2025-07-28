@@ -2,15 +2,14 @@
 import 'reflect-metadata';
 import express from 'express';
 import { AppDataSource } from './config/typeorm.config';
-import userRoutes from './routes/user.route';
-import { authRouter } from './routes/auth.route';
+import routes from './routes/routes';
 import './container/tsyringe.config';
 
 const app = express();
 app.use(express.json());
 
-app.use('/users', userRoutes);
-app.use('/auth', authRouter);
+// Use centralized routes
+app.use('/', routes);
 
 AppDataSource.initialize().then(() => {
   app.listen(3000, () => {
