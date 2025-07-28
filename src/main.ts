@@ -15,6 +15,6 @@ AppDataSource.initialize().then(() => {
   app.listen(3000, () => {
     console.log('Server running at http://localhost:3000');
   });
-}).catch(() => {
-  console.error('Failed to initialize data source:', "ERROR");
+}).catch((error) => {
+  console.error('Failed to initialize data source:', error);
 });
