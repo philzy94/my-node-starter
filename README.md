@@ -12,6 +12,7 @@ A powerful Node.js backend starter kit with comprehensive CLI generators for rap
 - 📚 **Swagger Documentation**
 - 🐳 **Docker Support**
 - 📝 **Winston Logger**
+- 🔄 **Development Tools** (ts-node-dev & nodemon)
 
 ## 🛠️ Tech Stack
 
@@ -23,6 +24,7 @@ A powerful Node.js backend starter kit with comprehensive CLI generators for rap
 - **Documentation**: Swagger
 - **Containerization**: Docker
 - **Logging**: Winston
+- **Development**: ts-node-dev & nodemon
 
 ---
 
@@ -70,9 +72,24 @@ npm run migration:run
 
 ### 4. Start Development Server
 
+You have two development options:
+
 ```bash
+# Option 1: ts-node-dev (faster for TypeScript)
 npm run dev
+
+# Option 2: nodemon (more features, better file watching)
+npm run dev:nodemon
 ```
+
+**Nodemon Features:**
+- ✅ **File Watching:** Automatically restarts on file changes
+- ✅ **TypeScript Support:** Uses ts-node for TypeScript compilation
+- ✅ **Path Mapping:** Supports tsconfig-paths for module resolution
+- ✅ **Ignore Patterns:** Skips test files and build artifacts
+- ✅ **Verbose Output:** Shows detailed restart information
+- ✅ **Manual Restart:** Type `rs` in terminal to restart manually
+- ✅ **Environment Variables:** Sets NODE_ENV to development
 
 ---
 
@@ -514,7 +531,8 @@ npm run generate -- --controller product --service product --entity product --dt
 
 ```bash
 # Development
-npm run dev          # Start development server
+npm run dev          # Start development server (ts-node-dev)
+npm run dev:nodemon  # Start development server (nodemon)
 npm run build        # Build for production
 npm run start        # Start production server
 
@@ -540,6 +558,58 @@ npm run generate:some -- <name> [options]
 npm run test         # Run tests
 npm run test:watch   # Run tests in watch mode
 ```
+
+---
+
+## 🔧 Development Tools
+
+### Nodemon Configuration
+
+The project includes a comprehensive `nodemon.json` configuration:
+
+```json
+{
+  "watch": ["src"],
+  "ext": "ts,js,json",
+  "ignore": [
+    "src/**/*.spec.ts",
+    "src/**/*.test.ts",
+    "dist",
+    "node_modules",
+    "*.log"
+  ],
+  "exec": "ts-node -r tsconfig-paths/register src/main.ts",
+  "env": {
+    "NODE_ENV": "development"
+  },
+  "delay": "1000",
+  "verbose": true,
+  "colours": true,
+  "restartable": "rs",
+  "legacyWatch": false,
+  "pollingInterval": 1000
+}
+```
+
+**Configuration Features:**
+- **File Watching:** Monitors `src/` directory for changes
+- **TypeScript Support:** Uses ts-node with path mapping
+- **Smart Ignoring:** Skips test files, build artifacts, and logs
+- **Manual Restart:** Type `rs` in terminal to restart manually
+- **Verbose Output:** Shows detailed restart information
+- **Environment Setup:** Sets NODE_ENV to development
+
+### Development Comparison
+
+| Feature | ts-node-dev | nodemon |
+|---------|-------------|---------|
+| TypeScript Support | ✅ Native | ✅ via ts-node |
+| File Watching | ✅ | ✅ |
+| Restart Speed | ⚡ Fast | 🐌 Slightly slower |
+| Configuration | 🔧 Limited | 🎛️ Extensive |
+| Manual Restart | ❌ | ✅ `rs` command |
+| Verbose Output | ❌ | ✅ |
+| Ignore Patterns | ✅ | ✅ |
 
 ---
 
