@@ -18,7 +18,8 @@
     "generate": "node scripts/generate.js",
     "generate:all": "node scripts/generate-all.js",
     "generate:some": "node scripts/generate-some.js",
-    "generate:auth": "node scripts/generate-auth-scaffold.js"
+    "generate:auth": "node scripts/generate-auth-scaffold.js",
+    "generate:dto": "node scripts/generate-dto.js"
   },
   "keywords": [],
   "author": "",

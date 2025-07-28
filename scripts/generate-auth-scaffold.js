@@ -8,6 +8,13 @@ function writeIfNotExists(filePath, content, label) {
     console.log(`⚠️  ${label} already exists: ${filePath}`);
     return false;
   }
+  
+  // Ensure the directory exists before writing the file
+  const dir = path.dirname(filePath);
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true });
+  }
+  
   fs.writeFileSync(filePath, content);
   console.log(`✅ ${label} created: ${filePath}`);
   return true;

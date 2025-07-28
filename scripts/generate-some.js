@@ -101,6 +101,58 @@ if (args.service) {
   }
 }
 
+// --- DTO ---
+if (args.dto) {
+  const subPath = args['dto-path'] || '';
+  const className = toPascalCase(name);
+  const dtoTemplate = `import { IsString, IsEmail, IsOptional, IsNumber, IsBoolean, IsDateString, MinLength, MaxLength, IsArray, ValidateNested } from 'class-validator';
+import { Type } from 'class-transformer';
+
+/**
+ * ${className}Dto
+ * Data Transfer Object for ${name} operations.
+ */
+export class ${className}Dto {
+  // TODO: Add properties with validation decorators
+  // Example:
+  // @IsString()
+  // @MinLength(2)
+  // @MaxLength(50)
+  // name!: string;
+  
+  // @IsEmail()
+  // email!: string;
+  
+  // @IsOptional()
+  // @IsString()
+  // description?: string;
+  
+  // @IsNumber()
+  // age!: number;
+  
+  // @IsBoolean()
+  // isActive!: boolean;
+  
+  // @IsDateString()
+  // birthDate!: string;
+  
+  // @IsArray()
+  // @ValidateNested({ each: true })
+  // @Type(() => String)
+  // tags!: string[];
+}
+`;
+  const dtosDir = path.join(__dirname, '..', 'src', 'dtos', subPath);
+  if (!fs.existsSync(dtosDir)) fs.mkdirSync(dtosDir, { recursive: true });
+  const dtoFilePath = path.join(dtosDir, `${name}.dto.ts`);
+  if (!fs.existsSync(dtoFilePath)) {
+    fs.writeFileSync(dtoFilePath, dtoTemplate);
+    console.log(`✅ DTO file created: ${dtoFilePath}`);
+  } else {
+    console.log(`⚠️  DTO file already exists: ${dtoFilePath}`);
+  }
+}
+
 // --- ROUTE ---
 if (args.route) {
   const subPath = args['route-path'] || '';
